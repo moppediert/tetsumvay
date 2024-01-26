@@ -1,6 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import React from "react";
+import backgroundImage from "./tet.PNG";
+import logo from "./logo.png";
 
 export default function Home() {
   const [firstDigit, setFirstDigit] = React.useState(0);
@@ -58,6 +61,12 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-center items-center h-full bg-[#FFF5D7] gap-4">
+      <Image
+        src={logo}
+        alt="logo"
+        className="fixed right-0 top-0"
+        height={240}
+      />
       <div className="h-96 w-72 bg-[#B72526] rounded-3xl flex justify-center items-center">
         <div className="text-9xl text-[#ECC158] font-bold">{`${firstDigit}${secondDigit}${thirdDigit}`}</div>
       </div>
@@ -67,6 +76,12 @@ export default function Home() {
       >
         Xổ Số
       </Button>
+      <Image
+        src={backgroundImage}
+        alt="background"
+        height={480}
+        className="fixed bottom-0 left-0"
+      />
     </div>
   );
 }
