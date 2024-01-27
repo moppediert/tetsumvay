@@ -72,7 +72,7 @@ export default function Home() {
   }, [number]);
 
   return (
-    <div className="flex flex-col justify-center items-center h-full bg-[#FFF5D7] pt-24">
+    <div className="flex flex-col justify-center items-center h-full pt-24">
       <h1 className="text-5xl text-[#B72526] font-bold">
         Bốc Thăm Trúng Thưởng
       </h1>
