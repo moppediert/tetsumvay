@@ -73,10 +73,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-center items-center h-full bg-[#FFF5D7] pt-24">
-      <div className="text-6xl text-[#B72526] font-bold">
+      <h1 className="text-5xl text-[#B72526] font-bold">
         Bốc Thăm Trúng Thưởng
-      </div>
-      <div className="flex flex-col justify-center items-center h-full gap-4 pb-12">
+      </h1>
+      <div className="flex flex-col justify-center items-center h-full w-[30%] xl:w-[20%] 2xl:w-[18%] gap-4 pb-12">
         <Image
           src={logoTeam}
           alt="logo-team"
@@ -89,7 +89,7 @@ export default function Home() {
           className="fixed right-0 top-0"
           height={240}
         />
-        <div className="h-96 w-72 bg-[#B72526] rounded-3xl flex justify-center items-center px-6">
+        <div className="h-[56%] w-full bg-[#B72526] rounded-3xl flex justify-center items-center px-6">
           <Image
             src={flag}
             className="absolute self-start -translate-x-[14rem] -translate-y-[8rem]"
@@ -120,7 +120,7 @@ export default function Home() {
         </div>
         <Button
           autoFocus
-          className="h-24 w-72 text-5xl text-[#ECC158] font-bold bg-[#B72526] rounded-2xl hover:bg-[#B72526EE] z-10"
+          className="h-[10%] w-full text-4xl text-[#ECC158] font-bold bg-[#B72526] rounded-2xl hover:bg-[#B72526EE] z-10"
           onClick={draw}
         >
           Xổ Số
@@ -128,7 +128,7 @@ export default function Home() {
         <Image
           src={backgroundImage}
           alt="background"
-          height={480}
+          height={440}
           className="fixed bottom-0 left-0"
         />
       </div>
