@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function Home() {
   const [text, setText] = React.useState(
-    "Món ăn ưa thích của bạn trong dip Tết là gì?",
+    "The quick brown fox jumps over the lazy dog",
   );
 
   const [textes, setTextes] = React.useState<string[]>([]);
@@ -39,7 +39,7 @@ export default function Home() {
           className="w-[720px] h-32 text-xl"
         ></Textarea>
         <Button
-          className="bg-[#B72526]"
+          className="bg-[#B72526] hover:bg-[#4E6618]"
           onClick={() => {
             setTextes([text]);
           }}

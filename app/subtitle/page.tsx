@@ -1,18 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { TypeAnimation } from "react-type-animation";
-import { Textarea } from "@/components/ui/textarea";
-import html2canvas from "html2canvas";
-import { useToPng, useToSvg } from "@hugocxl/react-to-image";
+import { useToPng } from "@hugocxl/react-to-image";
 import { Input } from "@/components/ui/input";
 
 export default function Home() {
-  const [imgSrc, setImgSrc] = React.useState("");
   const isDownload = React.useRef(false);
   const [state, convertToPng, ref] = useToPng<HTMLDivElement>({
     onSuccess: (data) => {
-      setImgSrc(data);
       if (isDownload.current) {
         download(data);
       }
@@ -60,10 +55,10 @@ export default function Home() {
           }}
           className="rounded-lg p-4"
         ></Input>
-        <Button type="submit">Download</Button>
+        <Button className="bg-[#B72526] hover:bg-[#4E6618]" type="submit">
+          Download
+        </Button>
       </form>
-
-      {/* <img src={imgSrc} alt="converted"></img> */}
     </div>
   );
 }
