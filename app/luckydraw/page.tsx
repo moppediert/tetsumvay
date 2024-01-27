@@ -5,6 +5,9 @@ import React from "react";
 import backgroundImage from "../tet.png";
 import logo from "../logo.png";
 import logoTeam from "../logo-team.png";
+import coin from "../2.png";
+import flag from "../1.png";
+import dance from "../3.png";
 import Confetti from "react-confetti";
 
 export default function Home() {
@@ -67,44 +70,60 @@ export default function Home() {
   }, [number]);
 
   return (
-    <div className="flex flex-col justify-center items-center h-full bg-[#FFF5D7] gap-4">
-      <div className="h-[80%] w-[80%] fixed"></div>
-      <Image
-        src={logoTeam}
-        alt="logo-team"
-        className="fixed left-0 top-0"
-        height={240}
-      />
-      <Image
-        src={logo}
-        alt="logo"
-        className="fixed right-0 top-0"
-        height={240}
-      />
-      <div className="h-96 w-72 bg-[#B72526] rounded-3xl flex justify-center items-center">
-        <div className="text-9xl text-[#ECC158] font-bold select-none">{`${firstDigit}${secondDigit}${thirdDigit}`}</div>
-        {isExploding && (
-          <Confetti
-            recycle={false}
-            numberOfPieces={3000}
-            tweenDuration={10000}
-            initialVelocityY={{ min: -20, max: 20 }}
-          />
-        )}
-        <audio ref={audioRef} src="/kids-cheering.mp3" />
+    <div className="flex flex-col justify-center items-center h-full bg-[#FFF5D7] pt-24">
+      <div className="text-6xl text-[#B72526] font-bold">
+        Bốc Thăm Trúng Thưởng
       </div>
-      <Button
-        className="h-24 w-72 text-5xl text-[#4E6618] font-bold border-[#B72526] border-4 rounded-2xl bg-transparent hover:bg-[#B72526] hover:text-[#ECC158] z-10"
-        onClick={draw}
-      >
-        Xổ Số
-      </Button>
-      <Image
-        src={backgroundImage}
-        alt="background"
-        height={480}
-        className="fixed bottom-0 left-0"
-      />
+      <div className="flex flex-col justify-center items-center h-full gap-4 pb-12">
+        <Image
+          src={logoTeam}
+          alt="logo-team"
+          className="fixed left-0 top-0"
+          height={240}
+        />
+        <Image
+          src={logo}
+          alt="logo"
+          className="fixed right-0 top-0"
+          height={240}
+        />
+        <div className="h-96 w-72 bg-[#B72526] rounded-3xl flex justify-center items-center">
+          <Image
+            src={flag}
+            className="absolute left-[28%] top-[25%]"
+            alt="flag"
+            height={240}
+          />
+          <Image
+            src={coin}
+            className="absolute right-[33%] top-[65%]"
+            alt="flag"
+            height={180}
+          />
+          <div className="text-9xl text-[#ECC158] font-bold select-none">{`${firstDigit}${secondDigit}${thirdDigit}`}</div>
+          {isExploding && (
+            <Confetti
+              recycle={false}
+              numberOfPieces={3000}
+              tweenDuration={10000}
+              initialVelocityY={{ min: -20, max: 20 }}
+            />
+          )}
+          <audio ref={audioRef} src="/kids-cheering.mp3" />
+        </div>
+        <Button
+          className="h-24 w-72 text-5xl text-[#ECC158] font-bold bg-[#B72526] rounded-2xl hover:bg-[#B72526EE] z-10"
+          onClick={draw}
+        >
+          Xổ Số
+        </Button>
+        <Image
+          src={backgroundImage}
+          alt="background"
+          height={480}
+          className="fixed bottom-0 left-0"
+        />
+      </div>
     </div>
   );
 }
