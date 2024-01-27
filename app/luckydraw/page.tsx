@@ -25,11 +25,12 @@ export default function Home() {
   };
   const [isExploding, setIsExploding] = React.useState(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const drumrollRef = React.useRef<HTMLAudioElement | null>(null);
 
   React.useEffect(() => {
     console.log("what");
     const down = (event: KeyboardEvent) => {
-      event.preventDefault();
+      // event.preventDefault();
       console.log(event.key);
       if (event.key === " ") {
         draw();
@@ -42,6 +43,7 @@ export default function Home() {
   React.useEffect(() => {
     if (reset) return;
     let counter = 0;
+    drumrollRef.current?.play();
     let timer1 = setInterval(() => {
       let randomDigit = Math.floor(Math.random() * 10);
       setFirstDigit(randomDigit);
@@ -50,7 +52,7 @@ export default function Home() {
       randomDigit = Math.floor(Math.random() * 10);
       setThirdDigit(randomDigit);
       counter += 1;
-      if (counter > 50) {
+      if (counter > 45) {
         clearInterval(timer1);
         let digits = number.toString().split("").map(Number);
         console.log(digits);
@@ -66,7 +68,7 @@ export default function Home() {
         audioRef.current!.currentTime = 0;
         audioRef.current?.play();
       }
-    }, 30);
+    }, 70);
   }, [number]);
 
   return (
@@ -87,20 +89,24 @@ export default function Home() {
           className="fixed right-0 top-0"
           height={240}
         />
-        <div className="h-96 w-72 bg-[#B72526] rounded-3xl flex justify-center items-center">
+        <div className="h-96 w-72 bg-[#B72526] rounded-3xl flex justify-center items-center px-6">
           <Image
             src={flag}
-            className="absolute left-[28%] top-[25%]"
+            className="absolute self-start -translate-x-[14rem] -translate-y-[8rem]"
             alt="flag"
             height={240}
           />
           <Image
             src={coin}
-            className="absolute right-[33%] top-[65%]"
+            className="absolute translate-x-[12rem] translate-y-[16rem]"
             alt="flag"
             height={180}
           />
-          <div className="text-9xl text-[#ECC158] font-bold select-none">{`${firstDigit}${secondDigit}${thirdDigit}`}</div>
+          <div className="text-9xl text-[#ECC158] font-bold select-none grid grid-cols-3 w-full justify-items-center">
+            <div className="">{firstDigit}</div>
+            <div className="">{secondDigit}</div>
+            <div className="">{thirdDigit}</div>
+          </div>
           {isExploding && (
             <Confetti
               recycle={false}
@@ -109,9 +115,11 @@ export default function Home() {
               initialVelocityY={{ min: -20, max: 20 }}
             />
           )}
+          <audio ref={drumrollRef} src="/drumroll.wav" />
           <audio ref={audioRef} src="/kids-cheering.mp3" />
         </div>
         <Button
+          autoFocus
           className="h-24 w-72 text-5xl text-[#ECC158] font-bold bg-[#B72526] rounded-2xl hover:bg-[#B72526EE] z-10"
           onClick={draw}
         >
