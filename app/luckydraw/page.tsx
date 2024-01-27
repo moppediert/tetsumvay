@@ -71,7 +71,7 @@ export default function Home() {
         <div className="text-9xl text-[#ECC158] font-bold">{`${firstDigit}${secondDigit}${thirdDigit}`}</div>
       </div>
       <Button
-        className="h-24 w-72 text-5xl text-[#4E6618] font-bold border-[#B72526] border-4 rounded-2xl bg-transparent hover:bg-[#B72526] hover:text-[#ECC158]"
+        className="h-24 w-72 text-5xl text-[#4E6618] font-bold border-[#B72526] border-4 rounded-2xl bg-transparent hover:bg-[#B72526] hover:text-[#ECC158] z-10"
         onClick={draw}
       >
         Xổ Số
