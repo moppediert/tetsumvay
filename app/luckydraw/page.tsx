@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
-import backgroundImage from "../tet.png";
 import logo from "../logo.png";
 import logoTeam from "../logo-team.png";
 import coin from "../2.png";
@@ -72,65 +71,60 @@ export default function Home() {
   }, [number]);
 
   return (
-    <div className="flex flex-col justify-center items-center h-full pt-24">
-      <h1 className="text-5xl text-[#B72526] font-bold">
+    <div className="flex flex-col items-center h-full w-full pb-8 overflow-auto gap-4">
+      <div className="flex items-center justify-between w-full overflow-x-hidden min-h-[180px] sm:h-[20%]">
+        <div className="relative h-full aspect-square ">
+          <Image src={logoTeam} alt="logo-team" className="object-cover" />
+        </div>
+        <div className="relative h-full aspect-square order-2">
+          <Image src={logo} alt="logo" className="object-cover" />
+        </div>
+        <h1 className="text-5xl text-[#B72526] font-bold text-center grow sm:flex justify-center hidden">
+          Bốc Thăm Trúng Thưởng
+        </h1>
+      </div>
+      <h1 className="text-2xl pb-4 text-[#B72526] font-bold text-center grow sm:hidden">
         Bốc Thăm Trúng Thưởng
       </h1>
-      <div className="flex flex-col justify-center items-center h-full w-[30%] xl:w-[20%] 2xl:w-[18%] gap-4 pb-12">
-        <Image
-          src={logoTeam}
-          alt="logo-team"
-          className="fixed left-0 top-0"
-          height={240}
-        />
-        <Image
-          src={logo}
-          alt="logo"
-          className="fixed right-0 top-0"
-          height={240}
-        />
-        <div className="h-[56%] w-full bg-[#B72526] rounded-3xl flex justify-center items-center px-6">
-          <Image
-            src={flag}
-            className="absolute self-start -translate-x-[14rem] -translate-y-[8rem]"
-            alt="flag"
-            height={240}
-          />
-          <Image
-            src={coin}
-            className="absolute translate-x-[12rem] translate-y-[16rem]"
-            alt="flag"
-            height={180}
-          />
-          <div className="text-9xl text-[#ECC158] font-bold select-none grid grid-cols-3 w-full justify-items-center">
-            <div className="">{firstDigit}</div>
-            <div className="">{secondDigit}</div>
-            <div className="">{thirdDigit}</div>
+      <div className="h-full w-full flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center gap-4 w-[300px] h-[600px]">
+          <div className="w-full grow bg-[#B72526] rounded-3xl flex justify-center items-center px-6">
+            {/* <Image */}
+            {/*   src={flag} */}
+            {/*   className="absolute self-start -translate-x-[14rem] -translate-y-[8rem]" */}
+            {/*   alt="flag" */}
+            {/*   height={240} */}
+            {/* /> */}
+            {/* <Image */}
+            {/*   src={coin} */}
+            {/*   className="absolute translate-x-[12rem] translate-y-[16rem]" */}
+            {/*   alt="flag" */}
+            {/*   height={180} */}
+            {/* /> */}
+            <div className="text-9xl text-[#ECC158] font-bold select-none grid grid-cols-3 w-full justify-items-center">
+              <div className="">{firstDigit}</div>
+              <div className="">{secondDigit}</div>
+              <div className="">{thirdDigit}</div>
+            </div>
+            {isExploding && (
+              <Confetti
+                recycle={false}
+                numberOfPieces={3000}
+                tweenDuration={10000}
+                initialVelocityY={{ min: -20, max: 20 }}
+              />
+            )}
+            <audio ref={drumrollRef} src="/drumroll.wav" />
+            <audio ref={audioRef} src="/kids-cheering.mp3" />
           </div>
-          {isExploding && (
-            <Confetti
-              recycle={false}
-              numberOfPieces={3000}
-              tweenDuration={10000}
-              initialVelocityY={{ min: -20, max: 20 }}
-            />
-          )}
-          <audio ref={drumrollRef} src="/drumroll.wav" />
-          <audio ref={audioRef} src="/kids-cheering.mp3" />
+          <Button
+            autoFocus
+            className=" w-full text-4xl text-[#ECC158] font-bold bg-[#B72526] rounded-2xl hover:bg-[#B72526EE] p-10"
+            onClick={draw}
+          >
+            Xổ Số
+          </Button>
         </div>
-        <Button
-          autoFocus
-          className="h-[10%] w-full text-4xl text-[#ECC158] font-bold bg-[#B72526] rounded-2xl hover:bg-[#B72526EE] z-10"
-          onClick={draw}
-        >
-          Xổ Số
-        </Button>
-        <Image
-          src={backgroundImage}
-          alt="background"
-          height={440}
-          className="fixed bottom-0 left-0"
-        />
       </div>
     </div>
   );
