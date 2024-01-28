@@ -71,8 +71,8 @@ export default function Home() {
   }, [number]);
 
   return (
-    <div className="flex flex-col items-center h-full w-full pb-8 overflow-auto gap-4">
-      <div className="flex items-center justify-between w-full overflow-x-hidden min-h-[180px] sm:h-[20%]">
+    <div className="flex flex-col items-center h-full w-full pb-8 overflow-auto gap-4 overflow-x-hidden">
+      <div className="flex items-center justify-between w-full overflow-x-hidden min-h-[180px] sm:h-[30%]">
         <div className="relative h-full aspect-square ">
           <Image src={logoTeam} alt="logo-team" className="object-cover" />
         </div>
@@ -88,32 +88,36 @@ export default function Home() {
       </h1>
       <div className="h-full w-full flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center gap-4 w-[300px] h-[600px]">
-          <div className="w-full grow bg-[#B72526] rounded-3xl flex justify-center items-center px-6">
-            {/* <Image */}
-            {/*   src={flag} */}
-            {/*   className="absolute self-start -translate-x-[14rem] -translate-y-[8rem]" */}
-            {/*   alt="flag" */}
-            {/*   height={240} */}
-            {/* /> */}
-            {/* <Image */}
-            {/*   src={coin} */}
-            {/*   className="absolute translate-x-[12rem] translate-y-[16rem]" */}
-            {/*   alt="flag" */}
-            {/*   height={180} */}
-            {/* /> */}
+          <div className="relative w-full grow bg-[#B72526] rounded-3xl flex justify-center items-center px-6">
+            <div className="absolute self-start translate-x-[12rem] -translate-y-[4rem] sm:-translate-x-[14rem]">
+              <Image
+                src={flag}
+                className="object-cover"
+                alt="flag"
+                height={240}
+              />
+            </div>
+            <div className="absolute self-start translate-x-[12rem] translate-y-[20rem] sm:translate-x-[12rem]">
+              <Image
+                src={coin}
+                className="object-cover"
+                alt="flag"
+                height={180}
+              />
+            </div>
+            <div className="absolute self-start -translate-y-[2rem] sm:translate-y-[20rem] -translate-x-[12rem] scale-x-[-1] sm:hidden">
+              <Image
+                src={dance}
+                className="object-cover"
+                alt="flag"
+                height={180}
+              />
+            </div>
             <div className="text-9xl text-[#ECC158] font-bold select-none grid grid-cols-3 w-full justify-items-center">
               <div className="">{firstDigit}</div>
               <div className="">{secondDigit}</div>
               <div className="">{thirdDigit}</div>
             </div>
-            {isExploding && (
-              <Confetti
-                recycle={false}
-                numberOfPieces={3000}
-                tweenDuration={10000}
-                initialVelocityY={{ min: -20, max: 20 }}
-              />
-            )}
             <audio ref={drumrollRef} src="/drumroll.wav" />
             <audio ref={audioRef} src="/kids-cheering.mp3" />
           </div>
@@ -124,6 +128,14 @@ export default function Home() {
           >
             Xổ Số
           </Button>
+          {isExploding && (
+            <Confetti
+              recycle={false}
+              numberOfPieces={3000}
+              tweenDuration={10000}
+              initialVelocityY={{ min: -20, max: 20 }}
+            />
+          )}
         </div>
       </div>
     </div>
