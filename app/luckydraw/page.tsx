@@ -10,65 +10,74 @@ import dance from "../3.png";
 import Confetti from "react-confetti";
 
 export default function Home() {
-  const [firstDigit, setFirstDigit] = React.useState(0);
-  const [secondDigit, setSecondDigit] = React.useState(0);
-  const [thirdDigit, setThirdDigit] = React.useState(0);
+  const [maxNum, setMaxNum] = React.useState(150);
+  const params =
+    typeof window !== "undefined"
+      ? new URL(document.location.toString()).searchParams
+      : undefined;
+  const maxNumInput = params?.get("max");
+
+  React.useEffect(() => {
+    if (
+      maxNumInput &&
+      !isNaN(Number(maxNumInput)) &&
+      Number(maxNumInput) < 1000
+    ) {
+      setMaxNum(Number(maxNumInput));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [number, setNumber] = React.useState(0);
-  const [reset, setReset] = React.useState(true);
+  const [drawing, setDrawing] = React.useState(false);
+
+  const drawn = React.useRef<number[]>([]);
   const draw = () => {
-    setReset(false);
+    if (drawing) return;
     setIsExploding(false);
-    // random between one and MAX
-    setNumber(Math.floor(Math.random() * 150) + 1);
+    setDrawing(true);
+    let counter = 0;
+    drumrollRef.current!.currentTime = 0;
+    drumrollRef.current?.play();
+    let timer = setInterval(() => {
+      setNumber(Math.floor(Math.random() * 999) + 1);
+      counter += 1;
+      if (counter > 35) {
+        clearInterval(timer);
+        if (drawn.current.length >= maxNum / 5) {
+          console.log(
+            `Drawn numbers: ${drawn.current}. Resetting repeatability guard.`,
+          );
+          drawn.current = [];
+        }
+        let finalNumber = Math.floor(Math.random() * maxNum) + 1;
+        while (drawn.current.includes(finalNumber)) {
+          finalNumber = Math.floor(Math.random() * maxNum) + 1;
+        }
+        drawn.current = drawn.current.concat([finalNumber]);
+        setNumber(finalNumber);
+        audioRef.current!.currentTime = 0;
+        audioRef.current?.play();
+        setIsExploding(true);
+        setDrawing(false);
+      }
+    }, 70);
   };
   const [isExploding, setIsExploding] = React.useState(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
   const drumrollRef = React.useRef<HTMLAudioElement | null>(null);
 
   React.useEffect(() => {
-    console.log("what");
     const down = (event: KeyboardEvent) => {
-      // event.preventDefault();
-      console.log(event.key);
-      if (event.key === " ") {
+      if (event.key === " " && !drawing) {
+        event.preventDefault();
         draw();
       }
     };
     document.addEventListener("keydown", down);
     return document.removeEventListener("keydown", down);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  React.useEffect(() => {
-    if (reset) return;
-    let counter = 0;
-    drumrollRef.current?.play();
-    let timer1 = setInterval(() => {
-      let randomDigit = Math.floor(Math.random() * 10);
-      setFirstDigit(randomDigit);
-      randomDigit = Math.floor(Math.random() * 10);
-      setSecondDigit(randomDigit);
-      randomDigit = Math.floor(Math.random() * 10);
-      setThirdDigit(randomDigit);
-      counter += 1;
-      if (counter > 45) {
-        clearInterval(timer1);
-        let digits = number.toString().split("").map(Number);
-        console.log(digits);
-        if (digits.length == 2) {
-          digits.splice(0, 0, 0);
-        } else if (digits.length == 1) {
-          digits.splice(0, 0, ...[0, 0]);
-        }
-        setFirstDigit(digits[0]);
-        setSecondDigit(digits[1]);
-        setThirdDigit(digits[2]);
-        setIsExploding(true);
-        audioRef.current!.currentTime = 0;
-        audioRef.current?.play();
-      }
-    }, 70);
-  }, [number]);
 
   return (
     <div className="flex flex-col items-center h-full w-full pb-8 overflow-auto gap-4 overflow-x-hidden">
@@ -113,10 +122,13 @@ export default function Home() {
                 height={180}
               />
             </div>
-            <div className="text-9xl text-[#ECC158] font-bold select-none grid grid-cols-3 w-full justify-items-center">
-              <div className="">{firstDigit}</div>
-              <div className="">{secondDigit}</div>
-              <div className="">{thirdDigit}</div>
+            <div className="text-9xl text-[#ECC158] font-bold select-none flex w-full justify-center">
+              <div>
+                {number.toLocaleString("en-US", {
+                  minimumIntegerDigits: 3,
+                  useGrouping: false,
+                })}
+              </div>
             </div>
             <audio ref={drumrollRef} src="/drumroll.wav" />
             <audio ref={audioRef} src="/kids-cheering.mp3" />
