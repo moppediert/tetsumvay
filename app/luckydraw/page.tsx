@@ -56,15 +56,15 @@ export default function Home() {
         }
         drawn.current = drawn.current.concat([finalNumber]);
         setNumber(finalNumber);
-        audioRef.current!.currentTime = 0;
-        audioRef.current?.play();
+        cheeringRef.current!.currentTime = 0;
+        cheeringRef.current?.play();
         setIsExploding(true);
         setDrawing(false);
       }
     }, 70);
   };
   const [isExploding, setIsExploding] = React.useState(false);
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const cheeringRef = React.useRef<HTMLAudioElement | null>(null);
   const drumrollRef = React.useRef<HTMLAudioElement | null>(null);
 
   React.useEffect(() => {
@@ -131,7 +131,7 @@ export default function Home() {
               </div>
             </div>
             <audio ref={drumrollRef} src="/drumroll.wav" />
-            <audio ref={audioRef} src="/kids-cheering.mp3" />
+            <audio ref={cheeringRef} src="/kids-cheering.mp3" />
           </div>
           <Button
             autoFocus
