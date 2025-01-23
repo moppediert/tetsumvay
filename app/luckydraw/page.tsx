@@ -10,7 +10,7 @@ import dance from "../3.png";
 import Confetti from "react-confetti";
 
 export default function Home() {
-  const [maxNum, setMaxNum] = React.useState(150);
+  const [maxNum, setMaxNum] = React.useState(180);
   const params =
     typeof window !== "undefined"
       ? new URL(document.location.toString()).searchParams
@@ -85,7 +85,7 @@ export default function Home() {
         <div className="relative h-full aspect-square ">
           <Image src={logoTeam} alt="logo-team" className="object-cover" />
         </div>
-        <div className="relative h-full aspect-square order-2">
+        <div className="relative h-[90%] aspect-square order-2">
           <Image src={logo} alt="logo" className="object-cover" />
         </div>
         <h1 className="text-5xl text-[#B72526] font-bold text-center grow sm:flex justify-center hidden">
