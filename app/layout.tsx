@@ -5,7 +5,7 @@ import "./globals.css";
 const quicksand = Quicksand({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
-  title: "Tết Sum Vầy, Xuân Gắn Kết",
+  title: "Tết Xa Tết Gần",
   description: "",
 };
 
